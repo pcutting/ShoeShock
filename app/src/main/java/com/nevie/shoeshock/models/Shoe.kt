@@ -3,19 +3,18 @@ package com.nevie.shoeshock.models
 import android.os.Build
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
-import java.util.*
 
 data class Shoe(
     val brand: String,
     var labelOfShoe: String,
     var modelName:String,
-    var description : String,
-    var price : String,
-    var sizesAvailableList : MutableList<SizeAvailability> = mutableListOf(),
+    var price: String,
+    var description: String,
+    var sizesAvailableList: MutableList<SizeAvailability> = mutableListOf(),
     var currency: String = "USD",
     var sex: Sex,
-    var discounts: MutableList<Discount> = mutableListOf(),
-    var images : MutableList<Int> = mutableListOf()
+    var images: MutableList<Int> = mutableListOf(),
+    var discounts: MutableList<Discount>? = null
 )
 
 enum class Sex(val label:String){
@@ -46,9 +45,8 @@ data class Discount(
     fun verifiedCodeIfNeeded(attemptedCodes: List<String>) =
         (discountClass == DiscountType.APPLIED_BY_CODE &&
                 attemptedCodes.contains(code) &&
-                (startDate == null ||
-                    endDate == null ||
-                    (startDate..endDate).contains(LocalDate.now())
+                ((startDate?.isBefore(LocalDate.now()) ?: false &&
+                    endDate?.isAfter(LocalDate.now()) ?: false)
                 )
         )
 
@@ -62,6 +60,7 @@ enum class DiscountType {
 
 data class SizeAvailability(
     var size: Double,
-    var quantity: Int = 0
+    var quantity: Int = 0,
+    var unitOfMeasure: String = "US"
 )
 
