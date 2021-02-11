@@ -8,18 +8,10 @@ data class ShoeItem(
     var quantity: Int
 )
 
-data class AppliedDiscount(
-    var discount : Discount
-    var
-)
-
 
 
 data class Cart (
-    var shoeItems : MutableList<ShoeItem> = mutableListOf(),
-    var discounts : MutableList<Discount> = mutableListOf(),
-
-
+    var shoeItems : MutableList<ShoeItem> = mutableListOf()
 
 )
 
