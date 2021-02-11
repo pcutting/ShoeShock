@@ -1,10 +1,9 @@
 package com.nevie.shoeshock
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.HorizontalScrollView
-import android.widget.LinearLayout.HORIZONTAL
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,10 +12,22 @@ import com.nevie.shoeshock.databinding.ActivityMainBinding
 import com.nevie.shoeshock.models.Shoe
 import com.nevie.shoeshock.repositories.ShoeRepository
 
+const val SHOE_ID = "Shoe_ID"
+
 class MainActivity : AppCompatActivity() {
 
+
+
     private val onShoeItemClickListener: (Shoe, Boolean) -> Unit = {shoe, clickedHeartBoolean ->
-        Toast.makeText(this, "Clicked on heart:${clickedHeartBoolean}. \nItem Clicked: ${shoe.labelOfShoe}. ", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Clicked on heart:${clickedHeartBoolean}. \nItem Clicked: ${shoe.name}. ", Toast.LENGTH_SHORT).show()
+        openShoeDetailsActivity(shoe)
+    }
+
+    private fun openShoeDetailsActivity(shoe : Shoe){
+        val intent = Intent(this,  ShoeDetailActivity::class.java)
+        intent.putExtra(SHOE_ID, shoe)
+        startActivity(intent)
+
     }
 
     private val clickableAdapter = ClickableRecyclerViewAdapter(onShoeItemClickListener)

@@ -1,22 +1,27 @@
 package com.nevie.shoeshock.models
 
 import android.os.Build
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.annotation.RequiresApi
+import kotlinx.android.parcel.Parcelize
 import java.math.RoundingMode
 import java.time.LocalDate
 
+@Parcelize
 data class Shoe(
     val brand: String,
-    var labelOfShoe: String,
+    var name: String,
     var modelName:String,
     var price: String,
     var description: String,
     var sizesAvailableList: MutableList<SizeAvailability> = mutableListOf(),
-    var currency: String = "USD",
-    var sex: Sex,
+    var currency: String? = "USD",
+    var sex: Sex = Sex.MALE,
     var images: MutableList<Int> = mutableListOf()
 
-    ) {
+    ): Parcelable {
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun priceAfterDiscounts(discounts: List<Discount>): String {
         var updatedPrice = price.toDoubleOrNull() ?: 0.0
@@ -29,9 +34,7 @@ data class Shoe(
                 maxDiscountFound = discount
             }
         }
-
         updatedPrice  *= (1-maxDiscountFound)
-
         return updatedPrice.toBigDecimal().setScale(2,RoundingMode.DOWN).toString()
     }
 }
@@ -83,9 +86,12 @@ enum class DiscountType {
     NEVER_DISCOUNTED
 }
 
+
+@Parcelize
 data class SizeAvailability(
     var size: Double,
     var quantity: Int = 0,
     var unitOfMeasure: String = "US"
-)
+): Parcelable
+
 

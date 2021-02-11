@@ -48,7 +48,7 @@ class ClickableRecyclerViewAdapter(private val shoeItemClickListener: (Shoe, Boo
 
         holderClickableShoe.itemView.findViewById<TextView>(R.id.price_label).text = priceWithSymbol
         holderClickableShoe.itemView.findViewById<TextView>(R.id.brand_label).text = shoes[position].brand
-        holderClickableShoe.itemView.findViewById<TextView>(R.id.model_name_label).text = shoes[position].labelOfShoe
+        holderClickableShoe.itemView.findViewById<TextView>(R.id.model_name_label).text = shoes[position].name
         //holder.itemView.findViewById<TextView>(R.id.discounted_price_label).text = shoes[position].priceAfterDiscounts()
         holderClickableShoe.itemView.findViewById<ImageView>(R.id.heart_image)
             .setOnClickListener {
