@@ -16,7 +16,7 @@ import com.nevie.shoeshock.repositories.ShoeRepository
 class MainActivity : AppCompatActivity() {
 
     private val onShoeItemClickListener: (Shoe, Boolean) -> Unit = {shoe, clickedHeartBoolean ->
-        Toast.makeText(this, "Clicked on heart:${clickedHeartBoolean}. Item Clicked: ${shoe.labelOfShoe}. ", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Clicked on heart:${clickedHeartBoolean}. \nItem Clicked: ${shoe.labelOfShoe}. ", Toast.LENGTH_SHORT).show()
     }
 
     private val clickableAdapter = ClickableRecyclerViewAdapter(onShoeItemClickListener)
