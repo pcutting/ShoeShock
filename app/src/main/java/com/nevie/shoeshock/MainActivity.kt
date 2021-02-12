@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private val clickableAdapter = ClickableRecyclerViewAdapter(onShoeItemClickListener)
+    private val shoesClickableAdapter = ClickableRecyclerViewAdapter(onShoeItemClickListener)
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +42,9 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        clickableAdapter.setList(ShoeRepository().getShoes())
+        shoesClickableAdapter.setList(ShoeRepository().getShoes())
         binding.shoesListRecyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL  , false)
-        binding.shoesListRecyclerview.adapter = clickableAdapter
+        binding.shoesListRecyclerview.adapter = shoesClickableAdapter
 
     }
 }

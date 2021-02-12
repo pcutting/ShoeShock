@@ -11,7 +11,8 @@ import com.nevie.shoeshock.models.Shoe
 
 private const val TAG = "ClickableRecyclerViewAd"
 
-class ClickableRecyclerViewAdapter(private val shoeItemClickListener: (Shoe, Boolean) -> Unit)
+class ClickableRecyclerViewAdapter(private val shoeItemClickListener
+                                   : (Shoe, Boolean) -> Unit)
     : RecyclerView.Adapter<ClickableRecyclerViewAdapter.ClickableShoeViewHolder>() {
 
 
@@ -53,7 +54,7 @@ class ClickableRecyclerViewAdapter(private val shoeItemClickListener: (Shoe, Boo
         holderClickableShoe.itemView.findViewById<ImageView>(R.id.heart_image)
             .setOnClickListener {
             shoeItemClickListener(shoes[position], true)
-            Log.d(TAG, "clicked on heart")
+            Log.d(TAG, "Clicked on heart")
             }
 
 

@@ -1,16 +1,31 @@
 package com.nevie.shoeshock
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nevie.shoeshock.databinding.ActivityShoeDetailBinding
 import com.nevie.shoeshock.models.Shoe
 import com.nevie.shoeshock.repositories.ShoeRepository
+import kotlinx.android.synthetic.main.cart_shoe_item.view.*
+import kotlinx.android.synthetic.main.shoe_image_item.view.*
 
 private const val TAG = "ShoeDetailActivity"
 
 class ShoeDetailActivity: AppCompatActivity() {
+
+    private val onShoeImageItemClickListener: (Int) -> Unit = {imageResourceInt ->
+        ActivityShoeDetailBinding.inflate(layoutInflater)
+            .largeShoeImageViewDetail.setImageResource(imageResourceInt)
+        Log.d(TAG,"image click? id: ${imageResourceInt}")
+
+
+    }
+
+    private val shoeImagesClickableAdapter = ShoeImageRecyclerViewAdapter(onShoeImageItemClickListener)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +51,15 @@ class ShoeDetailActivity: AppCompatActivity() {
         binding.modelNameLabelDetail.text = shoe.modelName
         binding.largeShoeImageViewDetail.setImageResource(shoe.images.first())
 
+        shoeImagesClickableAdapter.setShoe(shoe)
+
         var spinnerAdapter = ArrayAdapter<Double>(this, android.R.layout.simple_list_item_1, shoe_sizes_for_menu)
+        binding.shoeImagesRecyclerViewDetail.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL,false)
+        binding.shoeImagesRecyclerViewDetail.adapter = shoeImagesClickableAdapter
+
+//        binding.shoeImagesRecyclerViewDetail.shoe_image_in_recycler_item.setOnClickListener {
+//
+//        }
 
         binding.spinner.adapter = spinnerAdapter
 
