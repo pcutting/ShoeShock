@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nevie.shoeshock.databinding.ActivityShoeDetailBinding
 import com.nevie.shoeshock.models.Shoe
-import com.nevie.shoeshock.repositories.ShoeRepository
 import kotlinx.android.synthetic.main.cart_shoe_item.view.*
 import kotlinx.android.synthetic.main.shoe_image_item.view.*
+import com.nevie.shoeshock.repositories.ShoeRepository as ShoeRepository1
 
 private const val TAG = "ShoeDetailActivity"
 
@@ -33,7 +33,7 @@ class ShoeDetailActivity: AppCompatActivity() {
 
         var shoe : Shoe = intent.getParcelableExtra<Shoe>("Shoe_ID") as Shoe
 
-        val shoe_sizes_for_menu = shoe.sizesAvailableList.map { it.size }.toList()
+        val shoe_sizes_for_menu  = shoe.getSizes()
 
 
         Log.d(TAG, "$shoe")

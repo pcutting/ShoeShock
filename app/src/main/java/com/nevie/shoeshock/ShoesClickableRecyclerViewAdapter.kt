@@ -34,11 +34,6 @@ class ClickableRecyclerViewAdapter(private val shoeItemClickListener
 
     override fun getItemCount() = shoes.size
 
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        TODO("Not yet implemented")
-//    }
-
-
     override fun onBindViewHolder(holderClickableShoe: ClickableShoeViewHolder, position: Int) {
         //        var binding = ShoeItemBinding.inflate(layoutInflater)
         // tried to figure out binding, couldn't do it.

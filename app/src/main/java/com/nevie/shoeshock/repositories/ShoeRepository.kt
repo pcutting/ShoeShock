@@ -18,6 +18,11 @@ data class ShoeRepository(
     fun getDiscounts() = discounts ?: buildPromotions()
 
 
+    fun getSizes(shoe: Shoe):List<Double>{
+        return shoe.sizesAvailableMap.filter { (key,value) -> value > 0 }.keys.toList()
+    }
+
+
 }
 
 
@@ -45,13 +50,13 @@ private fun buildShoesCatalog(): MutableList<Shoe>{
             Manufacturer : PUMA
             ASIN : B083TR2QQC
         """.trimIndent(),
-        mutableListOf<SizeAvailability>(
-            SizeAvailability(7.0,210),
-            SizeAvailability(7.5,210),
-            SizeAvailability(8.0,210),
-            SizeAvailability(8.5,210),
-            SizeAvailability(9.0,210),
-            SizeAvailability(10.0,210)),
+        mutableMapOf(
+            7.0 to 210,
+            7.5 to 210,
+            8.0 to 210,
+            8.5 to 210,
+            9.0 to 210,
+            10.0 to 210),
         "USD",
         Sex.MALE,
         mutableListOf<Int>(
@@ -82,13 +87,13 @@ private fun buildShoesCatalog(): MutableList<Shoe>{
             NIKE WOMEN'S RUNNING SHOE: Imported, fabric: lightweight knit, plush padding, soft foam midsole, and rubber outsole.
 
         """.trimIndent(),
-        mutableListOf<SizeAvailability>(
-            SizeAvailability(7.0,3),
-            SizeAvailability(7.5,10),
-            SizeAvailability(8.0,21),
-            SizeAvailability(8.5,20),
-            SizeAvailability(9.0,10),
-            SizeAvailability(10.0,2)),
+        mutableMapOf(
+            7.0 to 10,
+            7.5 to 2,
+            8.0 to 2,
+            8.5 to 10,
+            9.0 to 20,
+            10.0 to 6),
         "USD",
         Sex.MALE,
         mutableListOf(
@@ -120,13 +125,13 @@ private fun buildShoesCatalog(): MutableList<Shoe>{
            RESILIENT RIDE: Injected unit sole midsole provides a resilient ride and enough durability to double as an outsole. This allows for a reduction in rubber and overall weight on your running shoes.
            RUN FREELY: Hexagonal flex grooves offer 6 different flex points for running freely in your Nike running shoes and the rounded heel rolls with the ground, promoting a natural range of motion.
         """.trimIndent(),
-        mutableListOf<SizeAvailability>(
-            SizeAvailability(7.0,30),
-            SizeAvailability(7.5,13),
-            SizeAvailability(8.0,121),
-            SizeAvailability(8.5,29),
-            SizeAvailability(9.0,10),
-            SizeAvailability(10.0,12)),
+        mutableMapOf(
+            7.0 to 30,
+            7.5 to 30,
+            8.0 to 30,
+            8.5 to 30,
+            9.0 to 30,
+            10.0 to 30),
         "USD",
         Sex.MALE,
         mutableListOf(
@@ -154,13 +159,13 @@ private fun buildShoesCatalog(): MutableList<Shoe>{
          【Applicable Scene】 : Perfect for sports, athletic, workout, gym, walking, jogging, traveling,running, and work for every season.
          【Service】 : Shipped from United states, and we offer a 100% no reason to return refun.
         """.trimIndent(),
-        mutableListOf<SizeAvailability>(
-            SizeAvailability(7.0,30),
-            SizeAvailability(7.5,30),
-            SizeAvailability(8.0,30),
-            SizeAvailability(8.5,30),
-            SizeAvailability(9.0,30),
-            SizeAvailability(10.0,30)),
+        mutableMapOf(
+            7.0 to 30,
+            7.5 to 30,
+            8.0 to 30,
+            8.5 to 30,
+            9.0 to 30,
+            10.0 to 30),
         "USD",
         Sex.MALE,
         mutableListOf(
@@ -186,13 +191,13 @@ private fun buildShoesCatalog(): MutableList<Shoe>{
          SENSITIVE FEET? DIABETES? ARTHRITIS? NEUROPATHY? Soft uppers with smooth interior lining and extra foam padding provide SUPERIOR COMFORT and protection for sensitive feet and an ideal footwear solution as men’s diabetic shoes, men’s arthritis shoes and men’s shoes for neuropathy.
          BUNIONS? HAMMERTOES? A wide & roomy TOE BOX offers a comfortable, non-binding fit for the front part of the foot and toes, and eases pressure on bunions, hammertoes Morton’s Neuroma & swollen feet. ORTHOTIC FRIENDLY: Extra depth design with removable insoles (¼” thick in the forefoot area) provides ample space for custom made orthotics.
         """.trimIndent(),
-        mutableListOf<SizeAvailability>(
-            SizeAvailability(7.0,30),
-            SizeAvailability(7.5,30),
-            SizeAvailability(8.0,30),
-            SizeAvailability(8.5,30),
-            SizeAvailability(9.0,30),
-            SizeAvailability(10.0,30)),
+        mutableMapOf(
+            7.0 to 30,
+            7.5 to 30,
+            8.0 to 30,
+            8.5 to 30,
+            9.0 to 30,
+            10.0 to 30),
         "USD",
         Sex.MALE,
         mutableListOf(
@@ -220,13 +225,13 @@ private fun buildShoesCatalog(): MutableList<Shoe>{
          SENSITIVE FEET? DIABETES? ARTHRITIS? NEUROPATHY? Soft uppers with smooth interior lining and extra foam padding provide SUPERIOR COMFORT and protection for sensitive feet and an ideal footwear solution as men’s diabetic shoes, men’s arthritis shoes and men’s shoes for neuropathy.
          BUNIONS? HAMMERTOES? A wide & roomy TOE BOX offers a comfortable, non-binding fit for the front part of the foot and toes, and eases pressure on bunions, hammertoes Morton’s Neuroma & swollen feet. ORTHOTIC FRIENDLY: Extra depth design with removable insoles (¼” thick in the forefoot area) provides ample space for custom made orthotics.
         """.trimIndent(),
-        mutableListOf<SizeAvailability>(
-            SizeAvailability(7.0,30),
-            SizeAvailability(7.5,30),
-            SizeAvailability(8.0,30),
-            SizeAvailability(8.5,30),
-            SizeAvailability(9.0,30),
-            SizeAvailability(10.0,30)),
+        mutableMapOf(
+            7.0 to 30,
+            7.5 to 30,
+            8.0 to 30,
+            8.5 to 30,
+            9.0 to 30,
+            10.0 to 30),
         "USD",
         Sex.MALE,
         mutableListOf(

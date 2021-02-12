@@ -15,7 +15,7 @@ data class Shoe(
     var modelName:String,
     var price: String,
     var description: String,
-    var sizesAvailableList: MutableList<SizeAvailability> = mutableListOf(),
+    var sizesAvailableMap: MutableMap<Double, Int> = mutableMapOf(),
     var currency: String? = "USD",
     var sex: Sex = Sex.MALE,
     var images: MutableList<Int> = mutableListOf()
@@ -36,6 +36,10 @@ data class Shoe(
         }
         updatedPrice  *= (1-maxDiscountFound)
         return updatedPrice.toBigDecimal().setScale(2,RoundingMode.DOWN).toString()
+    }
+
+    fun getSizes():List<Double>{
+        return sizesAvailableMap.filter { (key,value) -> value > 0 }.keys.toList()
     }
 }
 
@@ -86,12 +90,12 @@ enum class DiscountType {
     NEVER_DISCOUNTED
 }
 
-
-@Parcelize
-data class SizeAvailability(
-    var size: Double,
-    var quantity: Int = 0,
-    var unitOfMeasure: String = "US"
-): Parcelable
+//
+//@Parcelize
+//data class SizeAvailability(
+//    var size: Double,
+//    var quantity: Int = 0,
+//    var unitOfMeasure: String = "US"
+//): Parcelable
 
 

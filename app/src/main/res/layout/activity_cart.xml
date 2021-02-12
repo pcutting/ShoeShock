@@ -47,13 +47,14 @@
         tools:text="Total $" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cart_list_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-
+        android:background="@color/cardview_light_background"
         app:layout_constraintBottom_toTopOf="@id/purchase_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

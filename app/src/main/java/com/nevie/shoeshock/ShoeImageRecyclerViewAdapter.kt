@@ -14,18 +14,13 @@ class ShoeImageRecyclerViewAdapter(private val shoeImageItemClickListener
                                    : (Int) -> Unit)
     : RecyclerView.Adapter<ShoeImageRecyclerViewAdapter.ShoeImageRecyclerViewHolder>() {
 
-
     private lateinit var shoe : Shoe
-
 
     fun setShoe(shoe: Shoe){
         this.shoe = shoe
         notifyDataSetChanged()
 
     }
-
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoeImageRecyclerViewHolder {
         return ShoeImageRecyclerViewHolder(
@@ -40,12 +35,8 @@ class ShoeImageRecyclerViewAdapter(private val shoeImageItemClickListener
 
         holder.itemView.findViewById<ImageView>(R.id.shoe_image_in_recycler_item).setOnClickListener {
             shoeImageItemClickListener(shoe.images[position])
-
         }
-
     }
-
-
 
     class ShoeImageRecyclerViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView)
 }

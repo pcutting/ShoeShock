@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoeShock">
         <activity android:name=".ShoeDetailActivity" />
-
+        <activity android:name=".CartActivity"/>
 
         <activity android:name=".MainActivity">
             <intent-filter>
