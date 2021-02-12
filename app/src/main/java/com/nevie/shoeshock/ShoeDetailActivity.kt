@@ -1,5 +1,6 @@
 package com.nevie.shoeshock
 
+import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -53,7 +54,7 @@ class ShoeDetailActivity: AppCompatActivity() {
 
         shoeImagesClickableAdapter.setShoe(shoe)
 
-        var spinnerAdapter = ArrayAdapter<Double>(this, android.R.layout.simple_list_item_1, shoe_sizes_for_menu)
+        var spinnerAdapter = ArrayAdapter<Double>(this, R.layout.simple_list_item_1, shoe_sizes_for_menu)
         binding.shoeImagesRecyclerViewDetail.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL,false)
         binding.shoeImagesRecyclerViewDetail.adapter = shoeImagesClickableAdapter
 
