@@ -62,7 +62,7 @@ class ShoeDetailActivity: AppCompatActivity() {
         binding.spinner.adapter = spinnerAdapter
 
         var bar = supportActionBar
-        bar?.title = "Cart"
+        bar?.title = "${shoe.brand}"
         bar?.setDisplayHomeAsUpEnabled(true)
     }
 

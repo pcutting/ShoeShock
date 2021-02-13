@@ -28,7 +28,7 @@ class PurchaseActivity: AppCompatActivity() {
 
 
         var bar = supportActionBar
-        bar?.title = "back"
+        bar?.title = "Purchased"
         bar?.setDisplayHomeAsUpEnabled(true)
 
 

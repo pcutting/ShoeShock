@@ -64,6 +64,10 @@ class MainActivity : AppCompatActivity() {
         shoesClickableAdapter.setList(ShoeRepository().getShoes())
         binding.shoesListRecyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL  , false)
         binding.shoesListRecyclerview.adapter = shoesClickableAdapter
+
+        var bar = supportActionBar
+        bar?.title = "Shoe Shock - Catalog"
+
     }
 
     private fun openCartActivity(){

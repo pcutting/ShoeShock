@@ -8,6 +8,8 @@
     <string name="plus_one">+</string>
     <string name="purchase_complete">Purchase Complete</string>
     <string name="Catalog">Catalog</string>
+    <string name="brand">Brand</string>
+    <string name="todo">TODO</string>
 
 
 </resources>

@@ -61,7 +61,7 @@ class CartActivity : AppCompatActivity() {
         }
 
         var bar = supportActionBar
-        bar?.title = "Back"
+        bar?.title = "Cart"
         bar?.setDisplayHomeAsUpEnabled(true)
     }
 
