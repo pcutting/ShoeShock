@@ -7,17 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/view_label_main_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:text="@string/Catalog"
+        android:textSize="@dimen/header1_text_size"
+        app:layout_constraintBottom_toTopOf="@id/shoes_list_recyclerview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/shoes_list_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/standard_margin"
         android:background="@color/teal_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_label_main_activity"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

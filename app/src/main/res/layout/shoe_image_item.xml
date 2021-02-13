@@ -9,9 +9,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
-        android:layout_margin="4dp"
-        app:cardCornerRadius="20dp"
+        android:padding="@dimen/standard_padding"
+        android:layout_margin="@dimen/tight_margin"
+        app:cardCornerRadius="@dimen/standard_card_edge_rounding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
