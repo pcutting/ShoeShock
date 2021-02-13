@@ -74,22 +74,21 @@
                 android:id="@+id/size_label_for_spinner_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 android:text="@string/size"
                 app:layout_constraintBottom_toBottomOf="@+id/spinner_cart"
-                app:layout_constraintEnd_toStartOf="@+id/spinner_cart"
+                app:layout_constraintStart_toEndOf="@+id/shoe_image_cart"
                 app:layout_constraintTop_toTopOf="@+id/spinner_cart" />
+
 
             <Spinner
                 android:id="@+id/spinner_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toTopOf="@id/minus_one_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/shoe_image_cart"
+                app:layout_constraintStart_toEndOf="@+id/size_label_for_spinner_cart"
                 app:layout_constraintTop_toBottomOf="@+id/price_in_cart" />
-
 
             <Button
                 android:id="@+id/minus_one_button"
@@ -101,7 +100,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/shoe_image_cart"
                 app:layout_constraintEnd_toStartOf="@+id/quantity_input" />
 
-            <EditText
+            <TextView
                 android:id="@+id/quantity_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,6 +121,15 @@
                 app:layout_constraintBottom_toBottomOf="@+id/minus_one_button"
                 app:layout_constraintStart_toEndOf="@+id/quantity_input"
                 app:layout_constraintTop_toTopOf="@+id/minus_one_button" />
+
+            <TextView
+                android:id="@+id/cart_item_subtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/spinner_cart"
+                tools:text="Subtotal" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

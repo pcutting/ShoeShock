@@ -4,6 +4,7 @@ import android.os.Parcelable
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.parcel.Parcelize
+import java.math.RoundingMode
 
 private const val TAG = "Cart.kt"
 
@@ -12,15 +13,35 @@ data class ShoeItem(
     var shoe: Shoe,
     var size: Double,
     var quantity: Int
-) : Parcelable
+) : Parcelable {
+    fun getSubTotal()= shoe.price.toDouble() * quantity
 
+
+    fun getFormatedSubTotalAsString():String = "SubTotal: ${getSubTotal().toBigDecimal().setScale(2,RoundingMode.DOWN)}"
+
+    fun getDetails():String {
+        return "${shoe.brand} ${shoe.name} pairs: $quantity for $${shoe.price} SubTotal: ${getSubTotal()}"
+    }
+
+    fun plus(addNumberToOrder : Int){
+        this.quantity += addNumberToOrder
+        //TODO Verify supply.
+    }
+
+    fun minus(subtractNumberFromOrder : Int){
+        this.quantity -= subtractNumberFromOrder
+        if (quantity < 0) {
+            quantity = 0
+        }
+    }
+}
 
 enum class CartAction(val namedValue: String) {
     ADD_ONE("add"),
     SUBTRACT_ONE("subtract"),
-    PURCHASE("purchase"),
     CHANGE_SIZE("change_size")
 }
+
 @Parcelize
 object Cart : Parcelable{
 
@@ -28,6 +49,11 @@ object Cart : Parcelable{
 
     fun getCart() = shoeItems
 
+    fun getCartValue() =
+        shoeItems.sumByDouble { it.getSubTotal() }.toBigDecimal()
+        .setScale(2, RoundingMode.DOWN).toDouble()
+
+    fun getCartSummaryText() = shoeItems.joinToString("\n") { it.getDetails() }
 
 
     fun pairsOfShoes() : Int {

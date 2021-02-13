@@ -4,6 +4,9 @@ import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
@@ -55,10 +58,10 @@ class ShoeDetailActivity: AppCompatActivity() {
 
         binding.addToCartButtonDetail.setOnClickListener {
 
-                val shoeItem = ShoeItem(shoe,binding.sizeLabelForSpinnerCart.text.toString().toDouble(),1)
+                val shoeItem = ShoeItem(shoe,binding.spinner.selectedItem.toString().toDouble(),1)
                 Log.d(TAG, "shoeDetailActivity: onLoad: button click: $shoeItem")
                 Cart.addToCard(shoeItem)
-                openCartActivity(shoeItem)
+                openCartActivity()
         }
 
         shoeImagesClickableAdapter.setShoe(shoe)
@@ -75,15 +78,46 @@ class ShoeDetailActivity: AppCompatActivity() {
 
         binding.spinner.adapter = spinnerAdapter
 
+        var bar = supportActionBar
+        bar?.title = "Cart"
+        bar?.setDisplayHomeAsUpEnabled(true)
+
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //return super.onCreateOptionsMenu(menu)
+
+        val inflater : MenuInflater = menuInflater
+        inflater.inflate(com.nevie.shoeshock.R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            com.nevie.shoeshock.R.id.cart_menu -> {
+                openCartActivity()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+//        return super.onSupportNavigateUp()
+        onBackPressed()
+        return true
     }
 
 
 
-
-    private fun openCartActivity( shoeItem: ShoeItem){
+    private fun openCartActivity( ){
         Log.d(TAG, "openCartActivity")
         val intent = Intent(this, CartActivity::class.java)
-        intent.putExtra("shoeItem_id", shoeItem)
+
         startActivity(intent)
 
     }

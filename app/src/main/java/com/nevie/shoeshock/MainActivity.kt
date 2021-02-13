@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,36 +21,40 @@ const val SHOE_ID = "Shoe_ID"
 
 class MainActivity : AppCompatActivity() {
 
-
-
     private val onShoeItemClickListener: (Shoe, Boolean) -> Unit = {shoe, clickedHeartBoolean ->
         Toast.makeText(this, "Clicked on heart:${clickedHeartBoolean}. \nItem Clicked: ${shoe.name}. ", Toast.LENGTH_SHORT).show()
         if(clickedHeartBoolean) {
             val shoeItem = ShoeItem(shoe,7.0,1)
             Cart.addToCard(shoeItem)
-            openCartActivity(shoeItem)
+            openCartActivity()
             //TODO finish adding sizeing option before sinding off to cart.
         } else {
             openShoeDetailsActivity(shoe)
         }
     }
 
-    private fun openCartActivity( shoeItem: ShoeItem){
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //return super.onCreateOptionsMenu(menu)
 
-        val intent = Intent(this, CartActivity::class.java)
-        intent.putExtra("shoeItem_id", shoeItem)
-        startActivity(intent)
-
+        val inflater : MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
-    private fun openShoeDetailsActivity(shoe : Shoe){
-        val intent = Intent(this,  ShoeDetailActivity::class.java)
-        intent.putExtra(SHOE_ID, shoe)
-        startActivity(intent)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.cart_menu -> {
+                openCartActivity()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
 
+        }
     }
 
-    private val shoesClickableAdapter = ClickableRecyclerViewAdapter(onShoeItemClickListener)
+
+    private var shoesClickableAdapter = ClickableRecyclerViewAdapter(onShoeItemClickListener)
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,4 +71,23 @@ class MainActivity : AppCompatActivity() {
         binding.shoesListRecyclerview.adapter = shoesClickableAdapter
 
     }
+
+
+
+    private fun openCartActivity(){
+
+        val intent = Intent(this, CartActivity::class.java)
+        //intent.putExtra("shoeItem_id", shoeItem)
+        startActivity(intent)
+
+    }
+
+    private fun openShoeDetailsActivity(shoe : Shoe){
+        val intent = Intent(this,  ShoeDetailActivity::class.java)
+        intent.putExtra(SHOE_ID, shoe)
+        startActivity(intent)
+
+    }
+
+
 }

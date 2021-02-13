@@ -1,11 +1,8 @@
 package com.nevie.shoeshock
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nevie.shoeshock.models.Cart
 import com.nevie.shoeshock.models.CartAction
@@ -16,7 +13,7 @@ import kotlinx.android.synthetic.main.cart_shoe_item.view.*
 
 
 
-class CartRecyclerViewAdapter(private val cartItemClickListener : (Context, ShoeItem, CartAction, String) -> Unit )
+class CartRecyclerViewAdapter(private val cartItemClickListener : (MutableList<ShoeItem>, CartAction, Int, String) -> Unit )
     : RecyclerView.Adapter<CartRecyclerViewAdapter.CartViewHolder>() {
 
     private var shoeItems = mutableListOf<ShoeItem>()
@@ -35,7 +32,7 @@ class CartRecyclerViewAdapter(private val cartItemClickListener : (Context, Shoe
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
 
-        val cart_item = holder.itemView
+        val cartItem = holder.itemView
 
         //TODO fix size spinner.
         //cart_item.findViewById<TextView>(R.id.price_in_cart).spinner_cart.selectedItem("8") = shoeItems[position].size
@@ -43,11 +40,29 @@ class CartRecyclerViewAdapter(private val cartItemClickListener : (Context, Shoe
         //TODO fix discount price.
         //cart_item.findViewById<TextView>(R.id.discounted_price_in_cart).text = shoeItems[position].shoe.priceAfterDiscounts()
 
-        cart_item.findViewById<ImageView>(R.id.shoe_image_cart).setImageResource(shoeItems[position].shoe.images.first())
-        cart_item.findViewById<TextView>(R.id.price_in_cart).text = shoeItems[position].shoe.price
-        cart_item.findViewById<TextView>(R.id.label_for_cart_shoe).text = shoeItems[position].shoe.name
+        cartItem.shoe_image_cart.setImageResource(shoeItems[position].shoe.images.first())
+        cartItem.price_in_cart.text = shoeItems[position].shoe.price
+        cartItem.label_for_cart_shoe.text = shoeItems[position].shoe.name
 
-        cart_item.findViewById<TextView>(R.id.quantity_input).text = shoeItems[position].quantity.toString()
+        cartItem.quantity_input.text = shoeItems[position].quantity.toString()
+
+        cartItem.cart_item_subtotal.text = shoeItems[position].getFormatedSubTotalAsString()
+
+        cartItem.plus_one_button.setOnClickListener {
+            cartItemClickListener(shoeItems, CartAction.ADD_ONE, position, "")
+
+        }
+
+        cartItem.minus_one_button.setOnClickListener {
+            cartItemClickListener(shoeItems, CartAction.SUBTRACT_ONE, position, "")
+            if (shoeItems[position].quantity <= 0) {
+
+                shoeItems.removeAt(position)
+                notifyItemRemoved(position)
+
+            }
+
+        }
 
 
     }
