@@ -8,8 +8,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +22,6 @@ private const val TAG = "ShoeDetailActivity"
 
 class ShoeDetailActivity: AppCompatActivity() {
 
-    //private lateinit var largeImageViewReference : ImageView
 
     private val onShoeImageItemClickListener: ( Int) -> Unit = { imageResourceInt ->
         large_shoe_image_view_detail.setImageResource(imageResourceInt)
@@ -37,18 +34,11 @@ class ShoeDetailActivity: AppCompatActivity() {
         //setContentView(R.layout.activity_shoe_detail)
 
         var shoe : Shoe = intent.getParcelableExtra<Shoe>("Shoe_ID") as Shoe
-
-        val shoe_sizes_for_menu  = shoe.getSizes()
-
-
-        Log.d(TAG, "$shoe")
-
+        val shoeSizeForMenu  = shoe.getSizes()
         var binding = ActivityShoeDetailBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-        Log.d(TAG, "Shoe.brand = ${shoe.brand}")
-
+        //Log.d(TAG, "Shoe.brand = ${shoe.brand}")
         binding.brandLabelDetail.text = shoe.brand
         binding.priceLabelDetail.text = shoe.price
         binding.modelNameLabelDetail.text = shoe.modelName
@@ -57,38 +47,27 @@ class ShoeDetailActivity: AppCompatActivity() {
         binding.largeShoeImageViewDetail.setImageResource(shoe.images.first())
 
         binding.addToCartButtonDetail.setOnClickListener {
-
                 val shoeItem = ShoeItem(shoe,binding.spinner.selectedItem.toString().toDouble(),1)
-                Log.d(TAG, "shoeDetailActivity: onLoad: button click: $shoeItem")
+                //Log.d(TAG, "shoeDetailActivity: onLoad: button click: $shoeItem")
                 Cart.addToCard(shoeItem)
                 openCartActivity()
         }
 
         shoeImagesClickableAdapter.setShoe(shoe)
 
-        var spinnerAdapter = ArrayAdapter<Double>(this, R.layout.simple_list_item_1, shoe_sizes_for_menu)
+        var spinnerAdapter = ArrayAdapter<Double>(this, R.layout.simple_list_item_1, shoeSizeForMenu)
         binding.shoeImagesRecyclerViewDetail.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL,false)
         binding.shoeImagesRecyclerViewDetail.adapter = shoeImagesClickableAdapter
-
-        //largeImageViewReference = binding.largeShoeImageViewDetail
-
-//        binding.shoeImagesRecyclerViewDetail.shoe_image_in_recycler_item.setOnClickListener {
-//
-//        }
 
         binding.spinner.adapter = spinnerAdapter
 
         var bar = supportActionBar
         bar?.title = "Cart"
         bar?.setDisplayHomeAsUpEnabled(true)
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //return super.onCreateOptionsMenu(menu)
-
         val inflater : MenuInflater = menuInflater
         inflater.inflate(com.nevie.shoeshock.R.menu.menu_main, menu)
         return true
@@ -102,7 +81,6 @@ class ShoeDetailActivity: AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
-
         }
     }
 
@@ -115,9 +93,8 @@ class ShoeDetailActivity: AppCompatActivity() {
 
 
     private fun openCartActivity( ){
-        Log.d(TAG, "openCartActivity")
+        //Log.d(TAG, "openCartActivity")
         val intent = Intent(this, CartActivity::class.java)
-
         startActivity(intent)
 
     }

@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.cart_shoe_item.view.*
 
 
 
-class CartRecyclerViewAdapter(private val cartItemClickListener : (MutableList<ShoeItem>, CartAction, Int, String) -> Unit )
+class CartRecyclerViewAdapter(private val cartItemClickListener : (CartViewHolder, MutableList<ShoeItem>, CartAction, Int, String) -> Unit )
     : RecyclerView.Adapter<CartRecyclerViewAdapter.CartViewHolder>() {
 
     private var shoeItems = mutableListOf<ShoeItem>()
@@ -46,28 +46,20 @@ class CartRecyclerViewAdapter(private val cartItemClickListener : (MutableList<S
 
         cartItem.quantity_input.text = shoeItems[position].quantity.toString()
 
-        cartItem.cart_item_subtotal.text = shoeItems[position].getFormatedSubTotalAsString()
+        cartItem.cart_item_subtotal.text = shoeItems[position].getFormattedSubTotalAsString()
 
         cartItem.plus_one_button.setOnClickListener {
-            cartItemClickListener(shoeItems, CartAction.ADD_ONE, position, "")
-
+            cartItemClickListener(holder, shoeItems, CartAction.ADD_ONE, position, "")
         }
 
         cartItem.minus_one_button.setOnClickListener {
-            cartItemClickListener(shoeItems, CartAction.SUBTRACT_ONE, position, "")
+            cartItemClickListener(holder,shoeItems, CartAction.SUBTRACT_ONE, position, "")
             if (shoeItems[position].quantity <= 0) {
-
                 shoeItems.removeAt(position)
                 notifyItemRemoved(position)
-
             }
-
         }
-
-
     }
 
-
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
 }

@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //return super.onCreateOptionsMenu(menu)
-
         val inflater : MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_main, menu)
         return true
@@ -49,18 +48,14 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
-
         }
     }
-
 
     private var shoesClickableAdapter = ClickableRecyclerViewAdapter(onShoeItemClickListener)
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
 
         var binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
@@ -69,25 +64,16 @@ class MainActivity : AppCompatActivity() {
         shoesClickableAdapter.setList(ShoeRepository().getShoes())
         binding.shoesListRecyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL  , false)
         binding.shoesListRecyclerview.adapter = shoesClickableAdapter
-
     }
 
-
-
     private fun openCartActivity(){
-
         val intent = Intent(this, CartActivity::class.java)
-        //intent.putExtra("shoeItem_id", shoeItem)
         startActivity(intent)
-
     }
 
     private fun openShoeDetailsActivity(shoe : Shoe){
         val intent = Intent(this,  ShoeDetailActivity::class.java)
         intent.putExtra(SHOE_ID, shoe)
         startActivity(intent)
-
     }
-
-
 }

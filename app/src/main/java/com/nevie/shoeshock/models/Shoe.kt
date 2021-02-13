@@ -90,12 +90,3 @@ enum class DiscountType {
     NEVER_DISCOUNTED
 }
 
-//
-//@Parcelize
-//data class SizeAvailability(
-//    var size: Double,
-//    var quantity: Int = 0,
-//    var unitOfMeasure: String = "US"
-//): Parcelable
-
-

@@ -21,10 +21,7 @@ data class ShoeRepository(
     fun getSizes(shoe: Shoe):List<Double>{
         return shoe.sizesAvailableMap.filter { (key,value) -> value > 0 }.keys.toList()
     }
-
-
 }
-
 
 @RequiresApi(Build.VERSION_CODES.O)
 private fun buildShoesCatalog(): MutableList<Shoe>{
@@ -245,7 +242,6 @@ private fun buildShoesCatalog(): MutableList<Shoe>{
     return shoes
 }
 
-
 @RequiresApi(Build.VERSION_CODES.O)
 fun buildPromotions(): MutableList<Discount>{
     var promos = mutableListOf<Discount>()
@@ -274,7 +270,5 @@ fun buildPromotions(): MutableList<Discount>{
             DiscountType.AUTOMATICALLY_APPLIES_TO_ALL
         )
     )
-
-
     return promos
 }

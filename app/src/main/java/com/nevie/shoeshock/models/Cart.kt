@@ -16,8 +16,7 @@ data class ShoeItem(
 ) : Parcelable {
     fun getSubTotal()= shoe.price.toDouble() * quantity
 
-
-    fun getFormatedSubTotalAsString():String = "SubTotal: ${getSubTotal().toBigDecimal().setScale(2,RoundingMode.DOWN)}"
+    fun getFormattedSubTotalAsString():String = "SubTotal: ${getSubTotal().toBigDecimal().setScale(2,RoundingMode.DOWN)}"
 
     fun getDetails():String {
         return "${shoe.brand} ${shoe.name} pairs: $quantity for $${shoe.price} SubTotal: ${getSubTotal()}"
@@ -55,7 +54,6 @@ object Cart : Parcelable{
 
     fun getCartSummaryText() = shoeItems.joinToString("\n") { it.getDetails() }
 
-
     fun pairsOfShoes() : Int {
         var sum = 0
         shoeItems.forEach {
@@ -66,19 +64,17 @@ object Cart : Parcelable{
 
     fun cartItemsCount() = shoeItems.size
 
-
-
     fun addToCard(shoeItem: ShoeItem):Boolean{
         val availableAtSize = shoeItem.shoe.sizesAvailableMap[shoeItem.size] ?: 0
         return when {
             availableAtSize <= 0 -> {
-                Log.d(TAG, "addToCart(): There are zero in inventory to add. Wanted ${shoeItem.quantity}")
+                //Log.d(TAG, "addToCart(): There are zero in inventory to add. Wanted ${shoeItem.quantity}")
                 //Toast.makeText(this,"We couldn't add ${shoeItem.quantity} to the card, we only have ${availableAtSize} available.  We will add that many to your cart.",Toast.LENGTH_LONG).show()
                 true
             }
 
             shoeItem.quantity > availableAtSize -> {
-                Log.d(TAG, "addToCart(): Not enough shoes in inventory to add ${shoeItem.quantity}, had to add a reduced amount ($availableAtSize)")
+                //Log.d(TAG, "addToCart(): Not enough shoes in inventory to add ${shoeItem.quantity}, had to add a reduced amount ($availableAtSize)")
                 shoeItem.quantity = availableAtSize
                 shoeItems.add(shoeItem)
                 //Toast.makeText(this,"We couldn't add ${shoeItem.quantity} to the card, we only have ${availableAtSize} available.  We will add that many to your cart.", Toast.LENGTH_SHORT).show()
@@ -87,12 +83,11 @@ object Cart : Parcelable{
 
             shoeItem.quantity <= availableAtSize -> {
                 shoeItems.add(shoeItem)
-                Log.d(TAG, "addToCart(): added ${shoeItem.quantity} @ ${shoeItem.shoe}: size: ${shoeItem.size}")
-
+                //Log.d(TAG, "addToCart(): added ${shoeItem.quantity} @ ${shoeItem.shoe}: size: ${shoeItem.size}")
                 true
             }
             else ->  {
-                Log.d(TAG, "There was some error in adding items to your cart")
+                //Log.d(TAG, "There was some error in adding items to your cart")
                 //Toast.makeText(this,"There was an error in adding items to your cart", Toast.LENGTH_SHORT).show()
                 false
                 }

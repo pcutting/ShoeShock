@@ -1,10 +1,7 @@
 package com.nevie.shoeshock
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,37 +10,36 @@ import com.nevie.shoeshock.models.Cart
 import com.nevie.shoeshock.models.CartAction
 import com.nevie.shoeshock.models.ShoeItem
 import kotlinx.android.synthetic.main.activity_cart.*
-import kotlinx.android.synthetic.main.cart_shoe_item.*
 
+import kotlinx.android.synthetic.main.cart_shoe_item.view.*
+
+private const val TAG = "CartActivity"
 
 class CartActivity : AppCompatActivity() {
 
     private val onCartItemClickListener
-            : ( MutableList<ShoeItem>, CartAction, Int, String) -> Unit =
-        {shoeItems, cartAction, position, string ->
+            : (CartRecyclerViewAdapter.CartViewHolder, MutableList<ShoeItem>, CartAction, Int, String) -> Unit =
+        {holder, shoeItems, cartAction, position, string ->
         when (cartAction) {
             CartAction.ADD_ONE -> {
                 shoeItems[position].plus(1)
-                quantity_input.text = shoeItems[position].quantity.toString()
+                holder.itemView.quantity_input.text = shoeItems[position].quantity.toString()
+                holder.itemView.cart_item_subtotal.text = shoeItems[position].getFormattedSubTotalAsString()
                 cart_value_label.text = Cart.getCartValue().toString()
-                cart_item_subtotal.text = shoeItems[position].getFormatedSubTotalAsString()
+
             }
             CartAction.SUBTRACT_ONE -> {
                 shoeItems[position].minus(1)
-                quantity_input.text = shoeItems[position].quantity.toString()
+                holder.itemView.quantity_input.text = shoeItems[position].quantity.toString()
                 cart_value_label.text = Cart.getCartValue().toString()
-                cart_item_subtotal.text = shoeItems[position].getFormatedSubTotalAsString()
+                holder.itemView.cart_item_subtotal.text = shoeItems[position].getFormattedSubTotalAsString()
             }
 
             CartAction.CHANGE_SIZE -> {
                 TODO()
             }
         }
-
-
     }
-
-
 
     private val cartRecyclerViewAdapter = CartRecyclerViewAdapter(onCartItemClickListener)
 
@@ -65,22 +61,11 @@ class CartActivity : AppCompatActivity() {
         }
 
         var bar = supportActionBar
-        bar?.title = "Cart"
+        bar?.title = "Back"
         bar?.setDisplayHomeAsUpEnabled(true)
-
-
-//        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha)
-//
-//        toolbar.setNavigationOnClickListener(object : OnClickListener() {
-//            fun onClick(v: View?) {
-//                startActivity(Intent(applicationContext, MainActivity::class.java))
-//            }
-//        })
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        //
         onBackPressed()
         return true
     }

@@ -11,17 +11,14 @@ import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.nevie.shoeshock.models.Shoe
 
-class ShoeImageRecyclerViewAdapter(private val shoeImageItemClickListener
-                                   : (Int) -> Unit)
+class ShoeImageRecyclerViewAdapter(private val shoeImageItemClickListener: (Int) -> Unit)
     : RecyclerView.Adapter<ShoeImageRecyclerViewAdapter.ShoeImageRecyclerViewHolder>() {
-
 
     private lateinit var shoe : Shoe
 
     fun setShoe(shoe: Shoe){
         this.shoe = shoe
         notifyDataSetChanged()
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoeImageRecyclerViewHolder {
