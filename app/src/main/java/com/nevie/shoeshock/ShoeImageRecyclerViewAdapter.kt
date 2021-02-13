@@ -2,6 +2,7 @@ package com.nevie.shoeshock
 
 import android.content.Context
 import android.provider.ContactsContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.nevie.shoeshock.models.Shoe
 class ShoeImageRecyclerViewAdapter(private val shoeImageItemClickListener
                                    : (Int) -> Unit)
     : RecyclerView.Adapter<ShoeImageRecyclerViewAdapter.ShoeImageRecyclerViewHolder>() {
+
 
     private lateinit var shoe : Shoe
 
@@ -34,7 +36,8 @@ class ShoeImageRecyclerViewAdapter(private val shoeImageItemClickListener
         holder.itemView.findViewById<ImageView>(R.id.shoe_image_in_recycler_item).setImageResource(shoe.images[position])
 
         holder.itemView.findViewById<ImageView>(R.id.shoe_image_in_recycler_item).setOnClickListener {
-            shoeImageItemClickListener(shoe.images[position])
+            shoeImageItemClickListener( shoe.images[position])
+            Log.d("TAG", "ImageRsID ${shoe.images[position]}")
         }
     }
 
