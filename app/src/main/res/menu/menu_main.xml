@@ -6,6 +6,12 @@
     >
 
     <item
+        android:id="@+id/menu_spinner_for_sizes_in_options_menu"
+        android:title="@string/filter"
+        app:actionViewClass="android.widget.Spinner"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/cart_menu"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:orderInCategory="100"

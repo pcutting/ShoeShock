@@ -1,17 +1,20 @@
 package com.nevie.shoeshock
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nevie.shoeshock.models.Cart
 import com.nevie.shoeshock.models.CartAction
 import com.nevie.shoeshock.models.ShoeItem
+import kotlinx.android.synthetic.main.activity_shoe_detail.view.*
 import kotlinx.android.synthetic.main.cart_shoe_item.view.*
 
 
 
-
+private const val TAG = "CartRecyclerViewAdapter"
 
 class CartRecyclerViewAdapter(private val cartItemClickListener : (CartViewHolder, MutableList<ShoeItem>, CartAction, Int, String) -> Unit )
     : RecyclerView.Adapter<CartRecyclerViewAdapter.CartViewHolder>() {
@@ -59,6 +62,15 @@ class CartRecyclerViewAdapter(private val cartItemClickListener : (CartViewHolde
                 notifyItemRemoved(position)
             }
         }
+
+        val shoeSizesForMenu  = shoeItems[position].shoe.getSizes()
+        var spinnerAdapter = ArrayAdapter<Double>(cartItem.context, android.R.layout.simple_list_item_1, shoeSizesForMenu)
+        cartItem.spinner_cart.adapter = spinnerAdapter
+
+        shoeSizesForMenu.indexOf(shoeItems[position].size)
+        Log.d(TAG, "$shoeSizesForMenu : shoe sizes available for ${shoeItems[position].shoe.name}")
+        cartItem.spinner_cart.setSelection(shoeSizesForMenu.indexOf(shoeItems[position].size))
+
     }
 
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

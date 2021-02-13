@@ -4,10 +4,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nevie.shoeshock.models.Shoe
+import kotlinx.android.synthetic.main.cart_shoe_item.view.*
+import kotlinx.android.synthetic.main.shoe_item.view.*
 
 private const val TAG = "ClickableRecyclerViewAd"
 
@@ -52,6 +56,26 @@ class ClickableRecyclerViewAdapter(private val shoeItemClickListener: (Shoe, Boo
             //Log.d(TAG, "Clicked outside of heart")
             shoeItemClickListener(shoes[position], false)
         }
+
+        val spinner = holderClickableShoe.itemView.findViewById<Spinner>(R.id.menu_spinner_for_sizes_in_options_menu)
+        val sellectedSize = spinner?.selectedItem ?: 0.0
+        val shoeSizesForMenu  = shoes[position].getSizes()
+        if (!shoeSizesForMenu.contains(sellectedSize)){
+            holderClickableShoe.itemView.heart_image.setImageResource(R.drawable.ic_baseline_broken_image_24)
+
+        }
+
+        //holderClickableShoe
+
+        //var spinnerAdapter = ArrayAdapter<Double>(holderClickableShoe.itemView.context, android.R.layout.simple_list_item_1, shoeSizesForMenu)
+        //cartItem.spinner_cart.adapter = spinnerAdapter
+
+        //shoeSizesForMenu.indexOf(shoes[position].size)
+        //Log.d(TAG, "$shoeSizesForMenu : shoe sizes available for ${shoeItems[position].shoe.name}")
+        //cartItem.spinner_cart.setSelection(shoeSizesForMenu.indexOf(shoeItems[position].size))
+
+
+
     }
 
     class ClickableShoeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

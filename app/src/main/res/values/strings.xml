@@ -10,6 +10,7 @@
     <string name="Catalog">Catalog</string>
     <string name="brand">Brand</string>
     <string name="todo">TODO</string>
+    <string name="filter">Filtwer</string>
 
 
 </resources>
