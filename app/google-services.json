@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "784986701181",
+    "project_id": "shoe-shock",
+    "storage_bucket": "shoe-shock.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784986701181:android:cdc8a3ce9cac192bf72014",
+        "android_client_info": {
+          "package_name": "com.nevie.shoeshock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784986701181-relomb7m2582rqiqq7hjq8cq9oinoon3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkzOcvNKhzCHaS39OUGSYu3zkkZXIFzN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784986701181-relomb7m2582rqiqq7hjq8cq9oinoon3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
