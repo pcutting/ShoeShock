@@ -11,16 +11,10 @@ class ShoeDetailViewAdapter(private val shoe: Shoe,
                             private val onClick: (Int) -> Unit)
     : RecyclerView.Adapter<ShoeDetailViewAdapter.ShoeDetailViewHolder>() {
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoeDetailViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ShoeImageItemBinding.inflate(layoutInflater, parent, false)
         return ShoeDetailViewHolder(binding)
-
-//        return ShoeImageRecyclerViewHolder(
-//            LayoutInflater.from(parent.context).inflate(R.layout.shoe_image_item,parent, false)
-//        )
     }
 
     override fun getItemCount() = this.shoe.images.size
@@ -35,14 +29,11 @@ class ShoeDetailViewAdapter(private val shoe: Shoe,
     }
 
     class ShoeDetailViewHolder(private val binding: ShoeImageItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(shoe: Shoe, position: Int) {
             binding.apply{
                 shoeImageInRecyclerItem.setImageResource(shoe.images[position])
                 //root.setOnClickListener(binding, false)
-                //root.parent
             }
-
         }
     }
 }

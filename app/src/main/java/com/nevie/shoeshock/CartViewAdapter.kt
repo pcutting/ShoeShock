@@ -1,14 +1,11 @@
 package com.nevie.shoeshock
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nevie.shoeshock.databinding.CartShoeItemBinding
-import com.nevie.shoeshock.models.Cart
 import com.nevie.shoeshock.models.CartAction
 import com.nevie.shoeshock.models.ShoeItem
 
@@ -60,14 +57,19 @@ class CartViewAdapter(
             }
         }
 
-        val shoeSizesForMenu  = shoeItems[position].shoe.getSizes()
-//        var spinnerAdapter = ArrayAdapter<Double>(cartItem.context, android.R.layout.simple_list_item_1, shoeSizesForMenu)
+
+        //TODO trying to make it so user can change Size selected.  Not just display it.
+        //var newSize = holder.itemView.findViewById<Spinner>(R.id.spinner_cart).getItemS
+
+//
+//        val shoeSizesForMenu  = shoeItems[position].shoe.getSizes()
+//        var spinnerAdapter = ArrayAdapter<Double>(holder.itemView.context, android.R.layout.simple_list_item_1, shoeSizesForMenu)
+//        holder.itemView.findViewById<Spinner>(spinner_cart)
 //        cartItem.spinner_cart.adapter = spinnerAdapter
 //
 //        shoeSizesForMenu.indexOf(shoeItems[position].size)
 //        Log.d(TAG, "$shoeSizesForMenu : shoe sizes available for ${shoeItems[position].shoe.name}")
 //        cartItem.spinner_cart.setSelection(shoeSizesForMenu.indexOf(shoeItems[position].size))
-
     }
 
     class CartViewHolder(private val binding: CartShoeItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -75,6 +77,10 @@ class CartViewAdapter(
         fun bind(shoeItem: ShoeItem){
 
             binding.apply {
+
+                var spinnerAdapter = ArrayAdapter<Double>(itemView.context, android.R.layout.simple_list_item_1, shoeItem.shoe.getSizes() )
+                spinnerCart.adapter = spinnerAdapter
+                spinnerCart.setSelection(shoeItem.shoe.getSizes().indexOf(shoeItem.size))
 
                 shoeImageCart.setImageResource(shoeItem.shoe.images.first())
                 priceInCart.text = shoeItem.shoe.price

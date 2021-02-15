@@ -2,22 +2,21 @@ package com.nevie.shoeshock
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nevie.shoeshock.databinding.ActivityCartBinding
-import com.nevie.shoeshock.databinding.CartShoeItemBinding
 import com.nevie.shoeshock.models.Cart
 import com.nevie.shoeshock.models.CartAction
 import com.nevie.shoeshock.models.ShoeItem
-import kotlinx.android.synthetic.main.activity_cart.*
-import kotlinx.android.synthetic.main.cart_shoe_item.*
 
 
 private const val TAG = "CartActivity"
 
 class CartActivity : AppCompatActivity() {
+
+    //@Alan TODO
+    // I wanted to call these, but was having problems with the findViewById getting ints, not TextViews... posted more details on discord.
 
     private val commandsForCartItemActions
             : (CartViewAdapter.CartViewHolder, MutableList<ShoeItem>, CartAction, Int) -> Unit =
@@ -25,6 +24,7 @@ class CartActivity : AppCompatActivity() {
 //        when (cartAction) {
 //            CartAction.ADD_ONE -> {
 //                shoeItems[position].plus(1)
+                    ////Type mismatch: inferred type is TextView! but Int was expected.  why??
 //                holder.itemView.findViewById<TextView>(quantity_input).text  = shoeItems[position].quantity.toString()
 //                holder.itemView.findViewById<TextView>(cart_item_subtotal).text = shoeItems[position].getFormattedSubTotalAsString()
 //
@@ -48,8 +48,6 @@ class CartActivity : AppCompatActivity() {
 //            }
 //        }
     }
-
-    //private val cartRecyclerViewAdapter = CartRecyclerViewAdapter(onCartItemClickListener)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,18 +78,13 @@ class CartActivity : AppCompatActivity() {
 //                    holder.itemView.findViewById<TextView>(cart_item_subtotal).text = shoeItems[position].getFormattedSubTotalAsString()
                     holder.bind(shoeItems[position])
 
-                    //Verify this one.
-                    //findViewById<TextView>(cart_value_label).text =  Cart.getCartValue().toString()
+                    //Verify this one. Code smell?
                     binding.cartValueLabel.text = Cart.getCartValue().toString()
-
                 }
                 CartAction.SUBTRACT_ONE -> {
                     shoeItems[position].minus(1)
                     holder.bind(shoeItems[position])
-
-                    //Verify this one.
                     binding.cartValueLabel.text =  Cart.getCartValue().toString()
-
                 }
 //
 //                CartAction.CHANGE_SIZE -> {
@@ -103,8 +96,6 @@ class CartActivity : AppCompatActivity() {
                 }
             }
         }
-
-
 
         var bar = supportActionBar
         bar?.title = "Cart"
