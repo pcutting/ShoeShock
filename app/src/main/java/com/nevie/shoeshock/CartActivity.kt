@@ -72,7 +72,7 @@ class CartActivity : AppCompatActivity() {
 
             when (action) {
                 CartAction.ADD_ONE -> {
-                    shoeItems[position].plus(1)
+                    shoeItems[position].plus(1, this)
                     //Type mismatch: inferred type is TextView! but Int was expected.  why??
 //                    holder.itemView.findViewById<TextView>(quantity_input)).text  = shoeItems[position].quantity.toString()
 //                    holder.itemView.findViewById<TextView>(cart_item_subtotal).text = shoeItems[position].getFormattedSubTotalAsString()

@@ -3,7 +3,10 @@ package com.nevie.shoeshock.repositories
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.nevie.shoeshock.R
-import com.nevie.shoeshock.models.*
+import com.nevie.shoeshock.models.Discount
+import com.nevie.shoeshock.models.DiscountType
+import com.nevie.shoeshock.models.Sex
+import com.nevie.shoeshock.models.Shoe
 import java.time.LocalDate
 
 object ShoeRepository{
@@ -52,12 +55,12 @@ private fun buildShoesCatalog(): MutableList<Shoe>{
             ASIN : B083TR2QQC
         """.trimIndent(),
         mutableMapOf(
-            7.0 to 210,
+            4.0 to 1,
             7.5 to 210,
             8.0 to 210,
             8.5 to 210,
             9.0 to 210,
-            10.0 to 210),
+            14.0 to 210),
         "USD",
         Sex.MALE,
         mutableListOf<Int>(
@@ -92,7 +95,6 @@ private fun buildShoesCatalog(): MutableList<Shoe>{
             7.0 to 10,
             7.5 to 2,
             8.0 to 2,
-            8.5 to 10,
             9.0 to 20,
             10.0 to 6),
         "USD",
@@ -132,6 +134,7 @@ private fun buildShoesCatalog(): MutableList<Shoe>{
             8.0 to 30,
             8.5 to 30,
             9.0 to 30,
+            9.5 to 10,
             10.0 to 30),
         "USD",
         Sex.MALE,

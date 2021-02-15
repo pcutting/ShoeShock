@@ -1,8 +1,7 @@
 package com.nevie.shoeshock.models
 
+import android.content.Context
 import android.os.Parcelable
-import android.util.Log
-import android.widget.Toast
 import kotlinx.android.parcel.Parcelize
 import java.math.RoundingMode
 
@@ -22,9 +21,49 @@ data class ShoeItem(
         return "${shoe.brand} ${shoe.name} pairs: $quantity for $${shoe.price} SubTotal: $${getSubTotal()}"
     }
 
-    fun plus(addNumberToOrder : Int){
-        this.quantity += addNumberToOrder
-        //TODO Verify supply.
+    fun plus(addNumberToOrder : Int, context:Context? = null){
+        var attemptedTotal = this.quantity + addNumberToOrder
+        var numberToAddToCart = addNumberToOrder
+        var toastMsg:String = ""
+        val availableAtSize = shoe.sizesAvailableMap[size] ?: 0
+        val canAdd: Boolean = when {
+            availableAtSize <= 0 -> {
+                //Log.d(TAG, "addToCart(): There are zero in inventory to add. Wanted ${shoeItem.quantity}")
+                toastMsg = "We are out of that size, please choose another size or shoe."
+                false
+            }
+
+            attemptedTotal > availableAtSize -> {
+                //Log.d(TAG, "addToCart(): Not enough shoes in inventory to add ${shoeItem.quantity}, had to add a reduced amount ($availableAtSize)")
+                toastMsg =  "Not enough shoes in inventory to add ${quantity}, had to add a reduced amount ($availableAtSize)"
+                numberToAddToCart = availableAtSize - quantity
+                true
+            }
+
+            attemptedTotal <= availableAtSize -> {
+
+                //Log.d(TAG, "addToCart(): added ${shoeItem.quantity} @ ${shoeItem.shoe}: size: ${shoeItem.size}")
+                true
+            }
+            else ->  {
+                //Log.d(TAG, "There was some error in adding items to your cart")
+                //Toast.makeText(this,"There was an error in adding items to your cart", Toast.LENGTH_SHORT).show()
+                toastMsg = "Unknown error.  Please try again."
+                false
+            }
+        }
+
+        if (context != null) {
+//            try {
+//                Toast.makeText(context, toastMsg, Toast.LENGTH_SHORT).show()
+//            } catch (e: Exception) {
+//                Log.d(TAG, "someone tried to call this function without property defining a context")
+//            }
+        }
+
+        if (canAdd) {
+            this.quantity += numberToAddToCart
+        }
     }
 
     fun minus(subtractNumberFromOrder : Int){

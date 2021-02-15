@@ -10,7 +10,7 @@ class CartUnitTest {
     fun `Direct 10 units of tazon 6 cross trainer cost 505 point 10 at 50 point 51 each`() {
         Cart.clearCart()
         val shoes = ShoeRepository.getShoes()
-        Cart.addToCard(ShoeItem(shoes[0],7.0,10))
+        Cart.addToCard(ShoeItem(shoes[0],8.0,10))
 //        Cart.getCart()[0].plus(9)
         Assert.assertEquals("SubTotal: $505.10", Cart.getCart()[0].getFormattedSubTotalAsString())
     }
@@ -20,7 +20,7 @@ class CartUnitTest {
     fun `adding 9, to get 10 units of tazon 6 cross trainer cost 505 point 10 at 50 point 51 each`() {
         Cart.clearCart()
         val shoes = ShoeRepository.getShoes()
-        Cart.addToCard(ShoeItem(shoes[0],7.0,1))
+        Cart.addToCard(ShoeItem(shoes[0],8.0,1))
         Cart.getCart()[0].plus(9)
         Assert.assertEquals("SubTotal: $505.10", Cart.getCart()[0].getFormattedSubTotalAsString())
     }
@@ -31,7 +31,7 @@ class CartUnitTest {
         //Simulates the add button
         Cart.clearCart()
         val shoes = ShoeRepository.getShoes()
-        Cart.addToCard(ShoeItem(shoes[0],7.0,1))
+        Cart.addToCard(ShoeItem(shoes[0],8.0,1))
         Cart.getCart()[0].plus(1)
         Cart.getCart()[0].plus(1)
         Cart.getCart()[0].plus(1)
@@ -49,7 +49,7 @@ class CartUnitTest {
         //Simulates the add button
         Cart.clearCart()
         val shoes = ShoeRepository.getShoes()
-        Cart.addToCard(ShoeItem(shoes[0],7.0,1))
+        Cart.addToCard(ShoeItem(shoes[0],8.0,1))
         Cart.getCart()[0].plus(1)
 
         Cart.addToCard(ShoeItem(shoes[1],7.0,1))
