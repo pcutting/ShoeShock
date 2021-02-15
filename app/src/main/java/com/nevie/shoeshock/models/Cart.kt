@@ -2,6 +2,8 @@ package com.nevie.shoeshock.models
 
 import android.content.Context
 import android.os.Parcelable
+import android.util.Log
+import android.widget.Toast
 import kotlinx.android.parcel.Parcelize
 import java.math.RoundingMode
 
@@ -54,11 +56,11 @@ data class ShoeItem(
         }
 
         if (context != null) {
-//            try {
-//                Toast.makeText(context, toastMsg, Toast.LENGTH_SHORT).show()
-//            } catch (e: Exception) {
-//                Log.d(TAG, "someone tried to call this function without property defining a context")
-//            }
+            try {
+                Toast.makeText(context, toastMsg, Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Log.d(TAG, "someone tried to call this function without property defining a context")
+            }
         }
 
         if (canAdd) {
