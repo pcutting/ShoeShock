@@ -85,15 +85,14 @@ class CartActivity : AppCompatActivity() {
                     binding.cartValueLabel.text = Cart.getCartValue().toString()
 
                 }
-//                CartAction.SUBTRACT_ONE -> {
-//                    shoeItems[position].minus(1)
-//                    holder.itemView.findViewById<TextView>(quantity_input).text  = shoeItems[position].quantity.toString()
-//                    holder.itemView.findViewById<TextView>(cart_item_subtotal).text = shoeItems[position].getFormattedSubTotalAsString()
-//
-//                    //Verify this one.
-//                    holder.itemView.rootView.findViewById<TextView>(cart_value_label).text =  Cart.getCartValue().toString()
-//
-//                }
+                CartAction.SUBTRACT_ONE -> {
+                    shoeItems[position].minus(1)
+                    holder.bind(shoeItems[position])
+
+                    //Verify this one.
+                    binding.cartValueLabel.text =  Cart.getCartValue().toString()
+
+                }
 //
 //                CartAction.CHANGE_SIZE -> {
 //                    TODO()

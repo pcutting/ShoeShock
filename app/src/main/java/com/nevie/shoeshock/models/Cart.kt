@@ -16,7 +16,7 @@ data class ShoeItem(
 ) : Parcelable {
     fun getSubTotal()= shoe.price.toDouble() * quantity
 
-    fun getFormattedSubTotalAsString():String = "SubTotal: ${getSubTotal().toBigDecimal().setScale(2,RoundingMode.DOWN)}"
+    fun getFormattedSubTotalAsString():String = "SubTotal: ${getSubTotal().toBigDecimal().setScale(2,RoundingMode.HALF_UP)}"
 
     fun getDetails():String {
         return "${shoe.brand} ${shoe.name} pairs: $quantity for $${shoe.price} SubTotal: ${getSubTotal()}"
