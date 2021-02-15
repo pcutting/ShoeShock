@@ -6,16 +6,20 @@ import com.nevie.shoeshock.R
 import com.nevie.shoeshock.models.*
 import java.time.LocalDate
 
-data class ShoeRepository(
-    private var shoes : MutableList<Shoe>? = null,
-    private var discounts : MutableList<Discount>? = null
-) {
+object ShoeRepository{
+
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getShoes() = shoes ?: buildShoesCatalog()
+    private var shoes : MutableList<Shoe> = buildShoesCatalog()
+    @RequiresApi(Build.VERSION_CODES.O)
+    private var discounts : MutableList<Discount> = buildPromotions()
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getDiscounts() = discounts ?: buildPromotions()
+    fun getShoes() = shoes
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getDiscounts() = discounts
 
 
     fun getSizes(shoe: Shoe):List<Double>{

@@ -8,8 +8,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,20 +21,20 @@ const val SHOE_ID = "Shoe_ID"
 
 class MainActivity : AppCompatActivity() {
 
-    private val onShoeItemClickListener: (Shoe, Boolean) -> Unit = {shoe, clickedHeartBoolean ->
-        Toast.makeText(this, "Clicked on heart:${clickedHeartBoolean}. \nItem Clicked: ${shoe.name}. ", Toast.LENGTH_SHORT).show()
-        if(clickedHeartBoolean) {
-            var size = spinner_in_menu_link.selectedItem.toString().toDoubleOrNull() ?: 0.0
-            val shoeItem = ShoeItem(shoe,size,1)
-            Cart.addToCard(shoeItem)
-            openCartActivity()
-            //TODO finish adding sizing option before sending off to cart.
-        } else {
-            openShoeDetailsActivity(shoe)
-        }
-    }
+//    private val onShoeItemClickListener: (Shoe, Boolean) -> Unit = {shoe, clickedHeartBoolean ->
+//        Toast.makeText(this, "Clicked on heart:${clickedHeartBoolean}. \nItem Clicked: ${shoe.name}. ", Toast.LENGTH_SHORT).show()
+//        if(clickedHeartBoolean) {
+//            //var size = spinner_in_menu_link.selectedItem.toString().toDoubleOrNull() ?: 0.0
+//            //val shoeItem = ShoeItem(shoe,size,1)
+//            //Cart.addToCard(shoeItem)
+//            openCartActivity()
+//            //TODO finish adding sizing option before sending off to cart.
+//        } else {
+//            openShoeDetailsActivity(shoe)
+//        }
+//    }
 
-    private lateinit var spinner_in_menu_link : Spinner
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //return super.onCreateOptionsMenu(menu)
@@ -44,10 +42,10 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.menu_main, menu)
 
         val menuItemSpinner = menu?.findItem(R.id.menu_spinner_for_sizes_in_options_menu)
-        spinner_in_menu_link = menuItemSpinner?.actionView as Spinner
+        //spinner_in_menu_link = menuItemSpinner?.actionView as Spinner
         val items = arrayOf("7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", "11", "11.5")
         val adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, items)
-        spinner_in_menu_link.adapter = adapter
+       // spinner_in_menu_link.adapter = adapter
 
         return true
     }
@@ -59,27 +57,65 @@ class MainActivity : AppCompatActivity() {
                 openCartActivity()
                 true
             }
-            R.id.menu_spinner_for_sizes_in_options_menu -> {
-                this.shoesClickableAdapter.notifyDataSetChanged()
-                true
-            }
+//            R.id.menu_spinner_for_sizes_in_options_menu -> {
+//                this.shoesShoesClickableAdapter.notifyDataSetChanged()
+//                true
+//            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private var shoesClickableAdapter = ClickableRecyclerViewAdapter(onShoeItemClickListener)
+    //private lateinit var shoesShoesClickableAdapter : ShoesViewAdapter
+//    private lateinit var binding : ActivityMainBinding
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        var binding = ActivityMainBinding.inflate(layoutInflater)
+        //val referMainActivity = this
+
+        super.onCreate(savedInstanceState)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        shoesClickableAdapter.setList(ShoeRepository().getShoes())
+
+//        binding.shoesListRecyclerview.apply {
+//            adapter = ClickableRecyclerViewAdapter(
+//                ShoeRepository.getShoes()
+//            ) {  shoe: Shoe, clickedHeartBoolean: Boolean ->
+//                if (clickedHeartBoolean) {
+//                    openCartActivity()  // fails at this point..
+//                }
+//            }
+//        }
+
+
+        binding.shoesListRecyclerview.adapter =  ShoesViewAdapter(
+                ShoeRepository.getShoes()
+                ) { shoe: Shoe,clickedHeartBoolean: Boolean  ->
+                    if(clickedHeartBoolean) {
+
+                        // TODO spinner popup menu for size:
+                        //var size = spinner_in_menu_link.selectedItem.toString().toDoubleOrNull() ?: 0.0
+                        var size = 8.0
+
+                        //TODO Fix the size below with spinner popup menu.
+
+                        val shoeItem = ShoeItem(shoe,size,1)
+                        Cart.addToCard(shoeItem)
+                        openCartActivity()
+
+
+                        //TODO finish adding sizing option before sending off to cart.
+                    } else {
+                        openShoeDetailsActivity(shoe)
+                    }
+            }
+
+
         binding.shoesListRecyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL  , false)
-        binding.shoesListRecyclerview.adapter = shoesClickableAdapter
+        //binding.shoesListRecyclerview.adapter = shoesClickableAdapter
 
         var bar = supportActionBar
         bar?.title = "Shoe Shock - Catalog"
