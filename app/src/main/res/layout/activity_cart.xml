@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/standard_margin"
-        android:text="Purchase"
+        android:text="@string/purchase"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -48,4 +48,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
+
+    <TextView
+        android:id="@+id/currency_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/currency_symbol"
+        app:layout_constraintBottom_toBottomOf="@+id/cart_value_label"
+        app:layout_constraintEnd_toStartOf="@+id/cart_value_label"
+        app:layout_constraintTop_toTopOf="@+id/cart_value_label" />
 </androidx.constraintlayout.widget.ConstraintLayout>

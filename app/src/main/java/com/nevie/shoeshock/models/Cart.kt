@@ -16,10 +16,10 @@ data class ShoeItem(
 ) : Parcelable {
     fun getSubTotal()= shoe.price.toDouble() * quantity
 
-    fun getFormattedSubTotalAsString():String = "SubTotal: ${getSubTotal().toBigDecimal().setScale(2,RoundingMode.HALF_UP)}"
+    fun getFormattedSubTotalAsString():String = "SubTotal: $${getSubTotal().toBigDecimal().setScale(2,RoundingMode.HALF_UP)}"
 
     fun getDetails():String {
-        return "${shoe.brand} ${shoe.name} pairs: $quantity for $${shoe.price} SubTotal: ${getSubTotal()}"
+        return "${shoe.brand} ${shoe.name} pairs: $quantity for $${shoe.price} SubTotal: $${getSubTotal()}"
     }
 
     fun plus(addNumberToOrder : Int){
@@ -46,11 +46,15 @@ object Cart : Parcelable{
 
     private var shoeItems : MutableList<ShoeItem> = mutableListOf()
 
+    fun clearCart(){
+        shoeItems = mutableListOf()
+    }
+
     fun getCart() = shoeItems
 
     fun getCartValue() =
         shoeItems.sumByDouble { it.getSubTotal() }.toBigDecimal()
-        .setScale(2, RoundingMode.DOWN).toDouble()
+        .setScale(2, RoundingMode.HALF_UP).toDouble()
 
     fun getCartSummaryText() = shoeItems.joinToString("\n") { it.getDetails() }
 

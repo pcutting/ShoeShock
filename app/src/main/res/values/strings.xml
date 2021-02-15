@@ -11,6 +11,8 @@
     <string name="brand">Brand</string>
     <string name="todo">TODO</string>
     <string name="filter">Filtwer</string>
+    <string name="currency_symbol">$</string>
+    <string name="purchase">Purchase</string>
 
 
 </resources>
