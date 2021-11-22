@@ -11,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nevie.shoeshock.databinding.ActivityMainBinding
-import com.nevie.shoeshock.models.Cart
 import com.nevie.shoeshock.models.Shoe
-import com.nevie.shoeshock.models.ShoeItem
 import com.nevie.shoeshock.repositories.ShoeRepository
 
 const val SHOE_ID = "Shoe_ID"
@@ -47,30 +45,15 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.shoesListRecyclerview.adapter =  ShoesViewAdapter(
-                ShoeRepository.getShoes()
-                ) { shoe: Shoe,clickedHeartBoolean: Boolean  ->
-                    if(clickedHeartBoolean) {
-                        // TODO spinner popup menu for size:
-                        //var size = spinner_in_menu_link.selectedItem.toString().toDoubleOrNull() ?: 0.0
-                        var size = 8.0
-
-                        //TODO Fix the size below with spinner popup menu.
-
-                        val shoeItem = ShoeItem(shoe,size,1)
-                        Cart.addToCard(shoeItem)
-                        openCartActivity()
-
-                        //TODO finish adding sizing option before sending off to cart.
-                    } else {
-                        openShoeDetailsActivity(shoe)
-                    }
-            }
+        binding.shoesListRecyclerview.adapter =  ShoesViewAdapter(ShoeRepository.getShoes()) {
+                shoe: Shoe,clickedHeartBoolean: Boolean  ->
+                openShoeDetailsActivity(shoe)
+        }
 
         binding.shoesListRecyclerview.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL  , false)
 
-        var bar = supportActionBar
+        val bar = supportActionBar
         bar?.title = "Shoe Shock - Catalog"
     }
 

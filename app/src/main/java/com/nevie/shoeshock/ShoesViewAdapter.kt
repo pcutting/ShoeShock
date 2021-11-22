@@ -17,8 +17,8 @@ import com.nevie.shoeshock.models.ShoeItem
 private const val TAG = "ClickableRecyclerViewAd"
 
 class ShoesViewAdapter(private val shoes: MutableList<Shoe>,
-                       private val onClick: (Shoe, Boolean) -> Unit)
-    : RecyclerView.Adapter<ShoesViewAdapter.ShoesViewHolder>() {
+                       private val onClicked: (Shoe, Boolean) -> Unit
+): RecyclerView.Adapter<ShoesViewAdapter.ShoesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewItem: Int): ShoesViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -29,10 +29,12 @@ class ShoesViewAdapter(private val shoes: MutableList<Shoe>,
     override fun getItemCount() = shoes.size
 
     override fun onBindViewHolder(holder: ShoesViewHolder, position: Int) {
+
+
         holder.bind(shoes[position])
 
         holder.itemView.setOnClickListener {
-            onClick(shoes[position], false)
+            onClicked(shoes[position], false)
         }
     }
 
