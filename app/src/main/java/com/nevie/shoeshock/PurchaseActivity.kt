@@ -2,7 +2,6 @@ package com.nevie.shoeshock
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -19,7 +18,7 @@ class PurchaseActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var binding = ActivityPurchaseBinding.inflate(layoutInflater)
+        val binding = ActivityPurchaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.purchaseSummaryTextview.text = Cart.getCartSummaryText()
